@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import logo from '../images/logo.svg'
+import hamburger from '../images/icon-hamburger.svg'
+import close from '../images/icon-close.svg'
+import MobileMenu from "./MobileMenu.astro";
+
+const navLinks = [
+    {
+        label: 'HOW WE WORK',
+        link: '#'
+    },
+    {
+        label: 'BLOG',
+        link: '#'
+    },
+    {
+        label: 'ACCOUNT',
+        link: '#'
+    },
+]
+---
+
+<header class="">
+    <nav class="flex items-center justify-between p-6 lg:pt-[21px] lg:pb-[19px] lg:pl-[168px] lg:pr-[165px]">
+        <Image src={logo} alt='Site Logo'/>
+
+        <button id="hamburger" aria-label="Open Mobile Navigation" class="md:hidden">
+            <Image src={hamburger} alt=''/>
+        </button>
+
+        <button id="close" aria-label="Close Mobile Navigation" class="not-visible md:hidden">
+            <Image src={close} alt=''/>
+        </button>
+
+        <ul class="hidden md:flex gap-[25px] items-center uppercase">
+            {
+                navLinks.map(item => (
+                    <li>
+                        <a href={item.link} class="text-secondary text-[0.813rem] font-bold tracking-[1.5px] hover:text-primary focus:text-primary outline-primary">{item.label}</a>
+                    </li>
+                ))
+            }
+            <li>
+                <a href="#" class="text-primary border-[1.5px] border-primary hover:text-white focus:text-white text-[0.813rem] font-bold tracking-[1.5px] bg-transparent hover:bg-primary focus:bg-primary transition-all duration-500 outline-primary pt-[13px] pb-3 px-[28.5px]">VIEW PLANS</a>
+            </li>
+        </ul>
+    </nav>
+
+    <MobileMenu />
+</header>
+
+<style>
+    .not-visible {
+        display: none;
+    }
+</style>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const hamburgerBtn = document.getElementById('hamburger') as HTMLButtonElement;
+        const closeBtn = document.getElementById('close') as HTMLButtonElement;
+        const mobileMenu = document.getElementById('mobile-menu') as HTMLElement;
+        const body = document.body;
+
+        function toggleMobileMenu() {
+            const isMobileMenuVisible = mobileMenu?.classList.toggle('hidden');
+
+            body.style.overflow = !isMobileMenuVisible ? 'hidden' : '';
+            
+        }
+
+        hamburgerBtn?.addEventListener('click', () => {
+            toggleMobileMenu();
+            hamburgerBtn.classList.add('hidden');
+            closeBtn?.classList.remove('not-visible');
+        })
+
+        closeBtn?.addEventListener('click', () => {
+            toggleMobileMenu();
+            hamburgerBtn.classList.remove('hidden');
+            closeBtn?.classList.add('not-visible');
+        })
+
+        window.addEventListener('resize', () => {
+            if(window.innerWidth >= 768) {
+                body.style.overflow = '';
+                hamburgerBtn.classList.add('hidden');
+                closeBtn?.classList.add('not-visible');
+            } else if(window.innerWidth < 768) {
+                hamburgerBtn.classList.remove('hidden');
+                mobileMenu?.classList.add('hidden')
+                body.style.overflow = '';
+            }
+        })
+    })
+</script>

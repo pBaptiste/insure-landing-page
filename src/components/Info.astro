@@ -1,0 +1,10 @@
+---
+import { Image } from "astro:assets";
+
+const { imgSrc, title, desc } = Astro.props
+---
+<article class="flex flex-col items-center lg:items-start">
+    <Image src={imgSrc} alt='' class='mb-8'/>
+    <h3 class="text-center lg:text-start text-primary text-[1.75rem] tracking-[-0.389px] font-dm-serif mb-4">{title}</h3>
+    <p class="text-center lg:text-start text-secondary text-base leading-[1.625rem] max-w-[500px] lg:max-w-[350px]">{desc}</p>
+</article>

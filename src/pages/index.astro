@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Intro from '../components/Intro.astro';
+import Info from '../components/Info.astro';
+import snappyIcon from '../images/icon-snappy-process.svg'
+import pricesIcon from '../images/icon-affordable-prices.svg'
+import peopleFirstIcon from '../images/icon-people-first.svg'
+
+const info = [
+	{
+		imgSrc: snappyIcon,
+		title: 'Snappy Process',
+		desc: 'Our application process can be completed in minutes, not hours. Don’t get stuck filling in tedious forms.'
+	},
+	{
+		imgSrc: pricesIcon,
+		title: 'Affordable Prices',
+		desc: 'We don’t want you worrying about high monthly costs. Our prices may be low, but we still offer the best coverage possible.'
+	},
+	{
+		imgSrc: peopleFirstIcon,
+		title: 'People First',
+		desc: 'Our plans aren’t full of conditions and clauses to prevent payouts. We make sure you’re covered when you need it.'
+	},
+]
+---
+
+<Layout title="Insurance Landing Page.">
+	<main>
+		<Intro />
+		<section class="py-[140px] lg:pt-[305px] lg:pb-[158px] px-6 max-w-[1110px] lg:mx-auto flex flex-col items-center lg:items-start">
+			<div class="w-[150px] h-[1px] bg-[#C396C6] mb-10 lg:mb-[63px]"></div>
+			<h2 class="text-center text-5xl lg:text-[4.5rem] text-primary leading-[3rem] lg:leading-[4rem] tracking-[-0.667px] lg:tracking-[-1px] font-dm-serif mb-20 lg:mb-[96px]">We’re different</h2>
+			<div class="flex flex-col lg:flex-row gap-14 lg:gap-[30px]">
+				{
+					info.map(item => (
+						<Info imgSrc={item.imgSrc} title={item.title} desc={item.desc}/>
+					))
+				}
+			</div>
+		</section>
+		<section class="w-full max-w-[1110px] mx-auto bg-accent text-white py-[72px] px-6 lg:px-20 flex flex-col lg:flex-row lg:justify-between gap-10 items-center mb-[140px] lg:mb-[150px] bg-how-we-work-mobile bg-right-top bg-no-repeat md:bg-how-we-work-desktop">
+			<h2 class="text-center lg:text-start text-[2.5rem] lg:text-[3.5rem] leading-10 lg:leading-[3.5rem] tracking-[-0.556px] lg:tracking-[-0.778px] font-dm-serif max-w-[475px]">Find out more about how we work</h2>
+			<a href="#" class="uppercase text-[0.813rem] font-bold tracking-[1.5px] border-[1.5px] border-white hover:bg-white focus:bg-white hover:text-primary focus:text-primary outline-white transition-all duration-500 pt-[13px] pb-3 px-[24.5px]">HOW WE WORK</a>
+		</section>
+	</main>
+</Layout>
+
